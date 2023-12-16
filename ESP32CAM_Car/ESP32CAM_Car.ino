@@ -14,8 +14,8 @@
 //#define CAMERA_MODEL_M5STACK_PSRAM
 #define CAMERA_MODEL_AI_THINKER
 
-const char* ssid = "Sina";   //Enter SSID WIFI Name
-const char* password = "1232237483";   //Enter WIFI Password
+const char* ssid = "";   //Enter SSID WIFI Name
+const char* password = "";   //Enter WIFI Password
 IPAddress local_IP(192, 168, 1, 90);
 // Set your Gateway IP address
 IPAddress gateway(192, 168, 1, 1);
