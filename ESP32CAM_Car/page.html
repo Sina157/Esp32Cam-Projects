@@ -1,0 +1,57 @@
+<title>Esp32-Cam</title>
+<style>
+    *{
+        user-select:none;
+        text-align:center;
+        font-weight:bolder;
+        margin:5px;
+    }
+
+    .btn1{
+        width:90px;
+        height:80px;
+        background-color:lightgrey;
+    }
+
+    .btn2{
+        width:140px;
+        height:40px;
+        background-color:yellow;
+    }
+
+    body{
+        background-color:rgba(0, 0, 0, 0.777);
+    }
+</style>
+<IMG id='cam'style='width:350px;transform:rotate(270deg);'><br>
+<button class='btn1'value='go'>Forward</button> <br>
+<button class='btn1'value='left'>Left</button><button class='btn1'>...</button><button class='btn1'
+    value='right'>Right</button><br>
+<button class='btn1'value='back'>Backward</button><br>
+<button class='btn2'value='ledon'>Light ON</button>
+<button class='btn2'value='ledoff'>Light OFF</button><br>
+<label>1000</label><input style="width: 50%;"onchange='chg(this.value)' width='1060px'
+    value='1000'min='100'max='5000'id='d1'type='range'>
+<script>d = 1000;function getsend(arg){ xhttp=new XMLHttpRequest();xhttp.open('GET',arg+'?'+new Date().getTime(),true); xhttp.send()}
+function chg(v){d=v;document.getElementsByTagName("label")[0].innerHTML=v;}
+    (function UImg(){
+        function toDataURL(url,callback){
+            xhr = new XMLHttpRequest(); xhr.onload = function (){
+                reader = new FileReader();reader.onloadend=function(){callback(reader.result);}
+                reader.readAsDataURL(xhr.response);
+            };xhr.open('GET',url); xhr.responseType='blob';xhr.send();
+        } toDataURL(window.location.href+'capture',function (dataUrl){ document.getElementById('cam').setAttribute('src', dataUrl); });setTimeout(UImg, d);
+    })();
+    Mbtns=document.getElementsByClassName('btn1');for(i in Mbtns){
+        try{
+            if((window.screen.height>700) && (window.screen.width>600)) Mbtns[i].addEventListener('mouseup',function(){getsend('Stop')})
+            Mbtns[i].addEventListener('touchend',function(){getsend('Stop')});
+        } catch{}
+    }btns=document.getElementsByTagName("button");
+    for (i in btns){
+        try{
+            if((window.screen.height>700)&&(window.screen.width>600))
+                btns[i].addEventListener('mousedown',function(){getsend(this.value)});
+            btns[i].addEventListener('touchstart',function(){getsend(this.value)})
+        }catch{}
+    }</script>
