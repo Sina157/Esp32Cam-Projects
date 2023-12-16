@@ -34,8 +34,8 @@
 // ===========================
 // Enter your WiFi credentials
 // ===========================
-const char* ssid = "Sina";
-const char* password = "1232237483";
+const char* ssid = "";
+const char* password = "";
 IPAddress local_IP(192, 168, 1, 103);
 // Set your Gateway IP address
 IPAddress gateway(192, 168, 1, 1);
