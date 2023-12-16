@@ -1,0 +1,70 @@
+<title>Esp32-Cam</title>
+<style>
+    * {
+        user-select: none;
+        text-align: center;
+        font-weight: bolder;
+        margin: 5px;
+    }
+
+    .btn1 {
+        width: 90px;
+        height: 80px;
+        background-color: lightgrey;
+        border-radius: 10px;
+    }
+
+    .btn2 {
+        width: 140px;
+        height: 40px;
+        background-color: yellow;
+        border-radius: 5px;
+    }
+
+    body {
+        background-color: rgba(0, 0, 0, 0.777);
+    }
+
+    h1 {
+        text-align: center;
+        color: whitesmoke;
+    }
+</style>
+<h1>Esp32-Cam</h1>
+<IMG id='cam' style='width:350px;transform:rotate(270deg);'><br>
+<button class='btn1' value='r1'>1 seconds</button> <br>
+<button class='btn1' value='r3'>3 seconds</button>
+<button class='btn1' value='r5'>5 seconds</button><br>
+<button class='btn1' value='r7'>7 seconds</button><br>
+<button class='btn2' value='ledon'>Light ON</button>
+<button class='btn2' value='ledoff'>Light OFF</button><br>
+<script>
+    var r1_timeout, r3_timeout, r5_timeout, r7_timeout
+    function getsend(arg) { xhttp = new XMLHttpRequest(); xhttp.open('GET', arg + '?' + new Date().getTime(), true); xhttp.send() }
+    btns = document.getElementsByTagName("button");
+    function btn_act() {
+        delay = parseInt(this.value[1] * 1000);
+        if (this.value == 'r1') {
+            clearTimeout(r1_timeout);
+            r1_timeout = setTimeout(function () { getsend("r1") }, delay);
+        } else if (this.value == 'r3') {
+            clearTimeout(r3_timeout);
+            r3_timeout = setTimeout(function () { getsend("r3") }, delay);
+        } else if (this.value == 'r5') {
+            clearTimeout(r5_timeout);
+            r5_timeout = setTimeout(function () { getsend("r5") }, delay);
+        } else if (this.value == 'r7') {
+            clearTimeout(r7_timeout);
+            r7_timeout = setTimeout(function () { getsend("r7") }, delay);
+        }
+        getsend(this.value);
+    }
+    for (i in btns) {
+        try {
+            if ((window.screen.height > 700) && (window.screen.width > 600))
+                btns[i].addEventListener('mousedown', btn_act);
+            else {
+                btns[i].addEventListener('touchstart', btn_act)
+            }
+        } catch { }
+    }</script>
